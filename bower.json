@@ -1,0 +1,28 @@
+{
+  "name": "spectraa-cons",
+  "version": "0.0.0",
+  "authors": [
+    "Vijay"
+  ],
+  "description": "Spectraa is a construction firm",
+  "keywords": [
+    "web-components",
+    "custom-element",
+    "spectraa-cons"
+  ],
+  "main": "spectraa-cons.html",
+  "license": "MIT",
+  "homepage": "https://github.com/https://github.com/rvijayarajan/spectraa-cons/",
+  "demos": {
+    "Demo": "demo/index.html"
+  },
+  "ignore": [
+    "*",
+    "!*.html",
+    "!LICENSE"
+  ],
+  "devDependencies": {
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
+    "web-component-tester": "^6.0.0"
+  }
+}

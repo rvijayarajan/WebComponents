@@ -1,0 +1,25 @@
+<script>
+class PlasticButton extends HTMLButtonElement {
+
+  constructor() {
+  	super();
+  	
+  }
+
+  connectedCallback() {
+  	click();
+  }
+
+  static get is() {
+    return 'plastic-button';
+  }
+
+  click() {
+  	alert("CLICKED");
+  }
+  
+  
+}
+
+customElements.define(PlasticButton.is, PlasticButton, { extends: "button" } );
+</script>

@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<title>Dialog Widget</title>
+		<link rel="stylesheet" type="text/css" href="app/css/modal.css">		
+	</head>
+	<body>
+		<template id="modalTemplate">
+			<div role="dialog" aria-labelledby="title" aria-describedby="content">
+			    <h2 id="title">Dialog Title</h2>
+			    <p id="content">I am the dialog content.</p>
+			</div>
+		</template>
+
+		<div id="modalContent">
+			
+		</div>
+
+		<!-- Placing the script tags at end of body to prevent lazy loading -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+		<script src="app/js/utils/utils.js"></script>
+		<script src="app/js/utils/draggableManager.js"></script>
+		<script src="app/js/utils/resizeManager.js"></script>
+		<script src="app/js/utils/stackContextManager.js"></script>
+		<script src="app/js/utils/stackOrderManager.js"></script>
+		<script src="app/js/modal/overlay/overlay.js"></script>
+		<script src="app/js/modal/modalBase.js"></script>
+		<script src="app/js/modal/modal.js"></script>
+		<script>
+			$('#modalContent').append($('#modalTemplate').clone().html());
+		</script>
+	</body>
+</html>

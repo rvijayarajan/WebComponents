@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>spectraa-cons</title>
+
+    <!-- Setup WCT -->
+    <script src="https://unpkg.com/@webcomponents/webcomponentsjs@^1.0.0/webcomponents-loader.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <!-- Import spectraa-cons  -->
+    <link rel="import" href="../spectraa-cons.html">
+
+  </head>
+  <body>
+
+    <test-fixture id="default">
+      <template>
+        <spectraa-cons></spectraa-cons>
+      </template>
+    </test-fixture>
+
+    <script>
+      describe('<spectraa-cons>', () => {
+        var component;
+
+        beforeEach(() => component = fixture('default'));
+
+        it('is okay', function() {
+          expect(component).to.be.ok;
+        });
+      });
+    </script>
+  </body>
+</html>

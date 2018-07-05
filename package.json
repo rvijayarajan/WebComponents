@@ -1,0 +1,30 @@
+{
+  "name": "spectraa-cons",
+  "version": "0.0.0",
+  "description": "Spectraa is a construction firm",
+  "main": "spectraa-cons.html",
+  "scripts": {
+    "test": "wct",
+    "posttest": "eslint .",
+    "demo": "browser-sync start -c bs-config.js"
+  },
+  "author": "Vijay",
+  "license": "MIT",
+  "keywords": [
+    "web-components",
+    "custom-element",
+    "spectraa-cons"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/https://github.com/rvijayarajan/spectraa-cons.git"
+  },
+  "bugs": {
+    "url": "https://github.com/https://github.com/rvijayarajan/spectraa-cons/issues"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.9.0",
+    "eslint": "^3.14.1",
+    "web-component-tester": "^6.0.0"
+  }
+}
