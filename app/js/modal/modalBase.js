@@ -12,7 +12,7 @@
 
 	modalBase.prototype.init = function (options) {
 		this.options = $.extend({}, this.defaults, options);
-		this.$el = $(options.el);
+		this.$el = $(options.$el);
 		this.bind();
 		return this;
 	};

@@ -26,7 +26,14 @@
 		<script src="app/js/modal/modalBase.js"></script>
 		<script src="app/js/modal/modal.js"></script>
 		<script>
-			$('#modalContent').append($('#modalTemplate').clone().html());
+			var dialog = new window.modal({
+				"$el": $('#modalTemplate').clone().html(),
+				"draggable": true,
+    			"resizable": true,
+			});
+			dialog.show();
+			console.log(dialog);
+			// $('#modalContent').append($('#modalTemplate').clone().html());
 		</script>
 	</body>
 </html>

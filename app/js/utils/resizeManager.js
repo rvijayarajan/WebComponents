@@ -1,21 +1,21 @@
 var resizeManager = (function (window, $){
 	function resizeManager(el, options) {
 		this.$el = $(el);
-		this.options = $.extend({},defaults, options);
-		createResizeHandles();
-		bind();
+        this.options = $.extend({},defaults, options);
+        this.createResizeHandles();
+		this.bind();
 	}
 
-	resizeManager.proptotype.destroy = function() {
+	resizeManager.prototype.destroy = function() {
 		this.$el.off('mousedown.resize-manager');
         this.$el.find('.resize-manager').remove();
         this.$el = null;
         this.options = defaults;
 	};
 
-	function createResizeHandles() {
-		var handlesCss = this.options.handlesCss;
-        var handles = this.options.handles;
+	resizeManager.prototype.createResizeHandles = function() {
+        var handlesCss = this.options.handlesCss ? this.options.handlesCss : [];
+        var handles = this.options.handles ? this.options.handles : [];
         var $handles;
 
         // loop the resize handles CSS hash, create elements,
@@ -39,25 +39,30 @@ var resizeManager = (function (window, $){
         $handles.css('display', 'block');
 	}
 
-	function bind() {
+	resizeManager.prototype.bind = function() {
+
+        var self = this;
 
 		$(window).on('mousedown.resize-manager', function(m){
-
-			var direction = $el.attr('data-handle');
+            var direction = self.$el.attr('data-handle');
 
 			$(window).on('mousemove.resize-manager', function(mo){
-				this.$el.css(getResizeOffset(direction,m,mo));
+				self.$el.css(getResizeOffset(direction,m,mo));
 			});
 
 			function getResizeOffset(direction, dPoint, mPoint) {
 				var offset = {};
-				var elOffset       = this.$el.offset();
+				var elOffset       = self.$el.offset();
 				var initialHandleX = dPoint.pageX;
 				var initialHandleY = dPoint.pageY;
 				var finalHandleX   = mPoint.pageX;
 				var finalHandleY   = mPoint.pageY;
  				switch(direction) {
-					case 'TL': break;
+					case 'TL': 	offset.left   = finalHandleX - initialHandleX;
+								offset.width  = - (finalHandleX - initialHandleX);
+								offset.top    = finalHandleY - initialHandleY;
+								offset.height = - (finalHandleY - initialHandleY);
+								break;
 					case 'TM': break;
 					case 'TR': break;
 					case 'MR': break;

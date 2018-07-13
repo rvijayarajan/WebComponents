@@ -6,14 +6,14 @@
 	function modal (options) {
 		// Cloning template into HTML
 		options.$el = options.clone ? $(options.$el).clone() : $(options.$el);
-	    if (options.appendToEl) {
+		if (options.appendToEl) {
 	        $(options.appendToEl).append(options.$el);
 	    }
 
 	    modalBase.call(this,options);
 
 	    if (options.draggable) {
-	        this.draggable = new draggabeManager(this.$el[0], {
+	        this.draggable = new draggableManager(this.$el[0], {
 	            dragHandle: '#title'
 	        });
 	    }
@@ -40,7 +40,9 @@
     modal.prototype.render = function () {};
 
     // makes dialog visible in the UI
-    modal.prototype.show = function () {};
+    modal.prototype.show = function () {
+    	$('#modalContent').append(this.$el);
+    };
 
     // makes dialog invisible in the UI
     modal.prototype.hide = function () {};
