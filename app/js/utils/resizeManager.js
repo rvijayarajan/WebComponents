@@ -99,7 +99,7 @@ var resizeManager = (function (window, $){
 		});
 
 		$('body').on('mouseup.resize-manager', function (e) {
-            $(window).off('mousedown.resize-manager');
+            // $(window).off('mousedown.resize-manager');
             $(window).off('mousemove.resize-manager');
         });
 	}
