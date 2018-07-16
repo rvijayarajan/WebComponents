@@ -1,6 +1,6 @@
 var resizeManager = (function (window, $){
 	function resizeManager(el, options) {
-		this.$el = $(el);
+        this.$el = $(el);
         this.options = $.extend({},defaults, options);
         this.createResizeHandles();
 		this.bind();
@@ -25,7 +25,7 @@ var resizeManager = (function (window, $){
         for (var i = 0; i < handles.length; i++) {
             if (handlesCss[handles[i]]) {
                 this.$el
-                    .append($('<div class="resize-manager" data-handle="' +
+                    .prepend($('<div class="resize-manager" data-handle="' +
                     handles[i] + '">')
                     .css(handlesCss[handles[i]]));
             }
@@ -44,50 +44,73 @@ var resizeManager = (function (window, $){
         var self = this;
 
 		$(window).on('mousedown.resize-manager', function(m){
-            var direction = self.$el.attr('data-handle');
+            var direction = self.$el.find('.resize-manager').attr('data-handle');
 
 			$(window).on('mousemove.resize-manager', function(mo){
-				self.$el.css(getResizeOffset(direction,m,mo));
+                var offset = getResizeOffset(direction,m,mo);
+                console.log(offset);
+				self.$el.css({
+                    // left: offset.left,
+                    // top: offset.top,
+                    width: offset.width,
+                    height: offset.height
+                });
 			});
 
 			function getResizeOffset(direction, dPoint, mPoint) {
 				var offset = {};
 				var elOffset       = self.$el.offset();
+                console.log(self.$el.offset());
 				var initialHandleX = dPoint.pageX;
 				var initialHandleY = dPoint.pageY;
 				var finalHandleX   = mPoint.pageX;
 				var finalHandleY   = mPoint.pageY;
  				switch(direction) {
-					case 'TL': 	offset.left   = finalHandleX - initialHandleX;
-								offset.width  = - (finalHandleX - initialHandleX);
-								offset.top    = finalHandleY - initialHandleY;
-								offset.height = - (finalHandleY - initialHandleY);
+					case 'TL': 	//offset.left   = finalHandleX - initialHandleX;
+								//offset.width  = - (finalHandleX - initialHandleX);
+								//offset.top    = finalHandleY - initialHandleY;
+								//offset.height = - (finalHandleY - initialHandleY);
 								break;
 					case 'TM': break;
 					case 'TR': break;
-					case 'MR': break;
-					case 'BR': break;
-					case 'BM': break;
+					case 'MR':  //offset.top  = elOffset.top;
+                                //offset.left = elOffset.left;
+                                offset.width = self.$el.width() + (finalHandleX - initialHandleX);
+                                offset.height = self.$el.height();
+                                break;
+
+					case 'BR':  //offset.top  = elOffset.top;
+                                //offset.left = elOffset.left;
+                                offset.width = self.$el.width() + (finalHandleX - initialHandleX);
+                                offset.height = self.$el.height() + (finalHandleY - initialHandleY);
+                                break;
+
+					case 'BM':  //offset.top  = elOffset.top;
+                                //offset.left = elOffset.left;
+                                offset.width = self.$el.width();
+                                offset.height = self.$el.height() + (finalHandleY - initialHandleY);
+                                break;
+
 					case 'BL': break;
 					case 'ML': break;
 				}
+                return offset;
 			}
 		});
 
 		$('body').on('mouseup.resize-manager', function (e) {
+            $(window).off('mousedown.resize-manager');
             $(window).off('mousemove.resize-manager');
         });
 	}
 
-	return resizeManager;
-
-	    // default resize handle CSS
+	// default resize handle CSS
     var handlesCss = {
-        width: '10px',
-        height: '10px',
-        cursor: 'se-resize',
-        position: 'absolute',
-        display: 'none',
+        'width': '10px',
+        'height': '10px',
+        'cursor': 'se-resize',
+        'position': 'absolute',
+        'display': 'none',
         'background-color': '#000'
     };
 
@@ -95,6 +118,7 @@ var resizeManager = (function (window, $){
     var defaults = {
         handles: ['BR'],
         handlesCss: {
+            TL: $.extend({}, handlesCss, { cursor: 'nw-resize' }),
             TM: $.extend({}, handlesCss, {
                 cursor: 'n-resize', top: 0, left: '50%'
             }),
@@ -108,13 +132,15 @@ var resizeManager = (function (window, $){
             BM: $.extend({}, handlesCss, {
                 cursor: 's-resize', bottom: 0, left: '50%'
             }),
-            ML: $.extend({}, handlesCss, {
-                cursor: 'w-resize', bottom: '50%', left: 0
-            }),
             BL: $.extend({}, handlesCss, {
                 cursor: 'sw-resize', bottom: 0, left: 0
             }),
-            TL: $.extend({}, handlesCss, { cursor: 'nw-resize' }),
+            ML: $.extend({}, handlesCss, {
+                cursor: 'w-resize', bottom: '50%', left: 0
+            })
         }
     };
+
+    return resizeManager;
+
 })(window, jQuery);

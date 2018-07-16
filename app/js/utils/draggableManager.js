@@ -48,11 +48,11 @@ var draggableManager = (function(window, $){
 		this.options = defaults;
 	};
 
-	return draggableManager;
-
 	// instance default options
     var defaults = {
         dragHandle: null
     };
+
+    return draggableManager;
 
 })(window, jQuery);
